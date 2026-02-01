@@ -1,23 +1,583 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <!-- Schema.org FAQ 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "인레이치아보험 가입 시 고지의무란 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "고지의무는 보험 가입자가 보험 계약 시 자신의 현재 치아 상태나 치료 이력을 보험사에 정확하게 알릴 의무를 말합니다. 특히 5년 이내 충치 치료 이력이나 치과 방문 기록이 있다면 반드시 고지해야 하며, 이를 위반할 경우 보험금 지급 거절 사유가 될 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "인레이와 온레이, 크라운 치료의 차이점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "인레이는 충치가 작을 때 치아의 씹는 면 일부를 덮는 치료이고, 온레이는 충치가 더 깊어 치아의 씹는 면 전체를 덮는 치료입니다. 크라운은 충치가 매우 심해 치아 전체를 씌우는 치료로, 보험 보장 범위와 비용에서 차이가 납니다. 일반적으로 인레이와 온레이는 보존치료로 분류되며, 크라운은 보철치료로 분류되어 각각의 보장 금액이 다릅니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "치아보험 가입 후 인레이 보장을 받으려면 얼마나 기다려야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "대부분의 치아보험 상품은 가입 후 일정 기간(면책기간) 동안은 보장을 제한합니다. 인레이를 포함한 보존치료의 경우 면책기간은 보통 90일이며, 1년 이내에는 보장 금액의 50%만 지급하는 감액기간이 적용됩니다. 따라서 가입 즉시 보장을 받을 수는 없으므로 신중한 계획이 필요합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "실비보험으로 인레이 치료비를 보장받을 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아닙니다. 실손보험(실비보험)은 질병이나 상해로 인한 입원 및 통원 치료비를 보장하지만, 치과 치료 중 인레이, 크라운, 임플란트와 같은 비급여 치료는 보장 대상에서 제외됩니다. 인레이 치료는 별도의 치아보험을 통해서만 보장받을 수 있습니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- 스타일: 부드럽고 다채로운 색, 타이틀 강조, 계층 구조 -->
+    <style>
+      :root {
+        --primary-color: #007BFF; /* Main Brand Color */
+        --secondary-color: #28A745; /* Highlight Color */
+        --accent-color: #FFC107; /* Warning/Emphasis Color */
+        --text-color: #333333;
+        --bg-light: #F8F9FA;
+        --bg-white: #ffffff;
+        --btn-color: #DC3545; /* Call to Action Color */
+        --btn-hover: #C82333;
+      }
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin:0; padding:0;
+        background-color: var(--bg-light);
+        color: var(--text-color);
+        line-height:1.7;
+      }
+      .container {
+        max-width: 1100px;
+        margin:0 auto;
+        padding:0 20px;
+      }
+      header {
+        background-color: var(--primary-color);
+        padding: 30px 20px;
+        text-align: center;
+        color: var(--bg-white);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        font-weight: 900;
+      }
+      header h1 a {
+        color: var(--bg-white);
+        text-decoration: none;
+      }
+      .hero {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: var(--bg-white);
+        text-align: center;
+        padding: 80px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero:before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0 0 C25 50, 75 50, 100 0 V100 H0 Z'/%3E%3C/svg%3E");
+        background-size: cover;
+        opacity: 0.2;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 10;
+      }
+      .hero h1 {
+        font-size: 3.8em;
+        margin-bottom: 20px;
+        font-weight: 900;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      }
+      .hero p {
+        font-size: 1.5em;
+        margin-bottom: 35px;
+        font-weight: 500;
+      }
+      .cta-btn {
+        background-color: var(--btn-color);
+        color: var(--bg-white);
+        padding: 18px 45px;
+        font-size:1.4em;
+        font-weight: bold;
+        border:none;
+        border-radius:50px;
+        cursor:pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      }
+      .cta-btn:hover {
+        background-color: var(--btn-hover);
+        transform: translateY(-3px);
+      }
+      .compare-form-box {
+        background-color: var(--bg-white);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        margin-top: 40px;
+        text-align: left;
+      }
+      .compare-form-box h2 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 25px;
+        font-size:2.2em;
+        font-weight: 700;
+      }
+      .compare-form-box label {
+        display: block;
+        margin-bottom:8px;
+        font-weight:700;
+        color: var(--text-color);
+      }
+      .compare-form-box input {
+        width:100%;
+        padding:12px;
+        margin-bottom:20px;
+        border:1px solid #ddd;
+        border-radius:8px;
+        box-sizing:border-box;
+      }
+
+      .content-section {
+        margin-top: 40px;
+        background-color: var(--bg-white);
+        padding: 60px 0;
+        border-radius:10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      }
+      .content-section h2 {
+        font-size: 3em;
+        color: var(--primary-color);
+        margin-bottom:30px;
+        font-weight:900;
+        text-align:center;
+        border-bottom: 3px solid var(--primary-color);
+        display: inline-block;
+        padding-bottom: 10px;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .content-section h3 {
+        font-size:1.8em;
+        color: var(--secondary-color);
+        margin-top:40px;
+        margin-bottom:15px;
+        font-weight: 700;
+        border-left: 5px solid var(--accent-color);
+        padding-left: 15px;
+      }
+      .content-section h4 {
+        font-size:1.4em;
+        color: var(--primary-color);
+        margin-top:20px;
+        margin-bottom:10px;
+        font-weight: 700;
+      }
+      .feature-grid {
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top:30px;
+      }
+      .feature-grid .item {
+        width: calc(33.33% - 20px);
+        margin:10px;
+        padding:25px;
+        background-color: var(--bg-light);
+        border-radius:10px;
+        text-align:center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+      }
+      .feature-grid .item:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+      .feature-grid .item img {
+        width:80px; height:80px;
+        margin-bottom:15px;
+      }
+      .keyword-list {
+        list-style:none;
+        padding:0;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top:30px;
+      }
+      .keyword-list li {
+        background-color: var(--secondary-color);
+        color: var(--bg-white);
+        padding:10px 20px;
+        margin:5px;
+        border-radius:20px;
+        font-weight:500;
+        transition: background-color 0.3s ease;
+      }
+      .keyword-list li:hover {
+          background-color: #218838;
+      }
+      .faq-item {
+        border-bottom:1px solid #ddd;
+        padding:20px 0;
+      }
+      .faq-item h3 {
+        cursor:pointer;
+        display:flex;
+        justify-content: space-between;
+        align-items:center;
+        font-size:1.6em;
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+      .faq-item h3::after {
+        content: '+';
+        font-size:1.8em;
+        color: var(--secondary-color);
+        transition: transform 0.3s;
+      }
+      .faq-item.active h3::after {
+        content: '-';
+        transform: rotate(180deg);
+      }
+      .faq-item p {
+        display: none;
+        padding-top:10px;
+        color:#555;
+        font-size:1.1em;
+      }
+      .faq-item.active p {
+        display: block;
+      }
+      footer {
+        background-color: var(--primary-color);
+        color: var(--bg-white);
+        text-align:center;
+        padding: 40px 20px;
+        font-size:0.9em;
+      }
+      footer a {
+        color: var(--bg-white);
+        text-decoration:none;
+        margin:0 10px;
+      }
+      footer a:hover {
+        text-decoration:underline;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 0.95em;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+      th, td {
+        border: 1px solid #eee;
+        padding: 15px;
+        text-align: left;
+      }
+      th {
+        background-color: var(--primary-color);
+        color: var(--bg-white);
+        font-weight: 700;
+        font-size: 1.1em;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      .callout {
+        background-color: var(--highlight-color);
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid var(--primary-color);
+        margin: 20px 0;
+      }
+      .callout p {
+        margin: 0;
+        font-size: 1.1em;
+      }
+      .comparison-table h4 {
+        margin-top: 30px;
+        color: var(--secondary-color);
+        font-size: 1.5em;
+        font-weight: 700;
+      }
+      /* Responseive Design */
+      @media (max-width:768px) {
+        .hero h1 { font-size:2.8em; }
+        .hero p { font-size:1.3em; }
+        .cta-btn { padding:15px 30px; font-size:1.1em; }
+        .compare-form-box { padding:25px; }
+        .content-section h2 { font-size:2.4em; }
+        .feature-grid { flex-direction: column; }
+        .feature-grid .item { width:100%; margin:10px 0; }
+        .keyword-list li { margin:3px; font-size:0.9em; }
+        .faq-item h3 { font-size:1.4em; }
+        th, td { padding: 10px; font-size: 0.9em; }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="/">인레이치아보험 전문 비교 센터</a></h1>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>인레이치아보험, 2026년 최적의 가입 조건을 찾아보세요</h1>
+                <p>충치 치료 인레이, 크라운 비용 걱정 없이! 복잡한 치과 치료비, 현명하게 대비할 수 있도록 맞춤 견적을 비교해 드립니다.</p>
+                <div class="compare-form-box">
+                    <h2>인레이치아보험 무료 견적 비교 요청</h2>
+                    <p>간단한 정보 입력으로 여러 보험사의 보장 내용과 예상 보험료를 한눈에 비교할 수 있습니다.</p>
+                    <form action="#" method="post">
+                        <label for="name">이름</label>
+                        <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+                        <label for="phone">연락처</label>
+                        <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력하세요" required>
+                        <label for="birth">생년월일 (예: 19901025)</label>
+                        <input type="text" id="birth" name="birth" placeholder="생년월일 8자리를 입력하세요" required>
+                        <label for="treatment_history">최근 5년간 치과 치료 이력 (예: 충치 치료 유무)</label>
+                        <input type="text" id="treatment_history" name="treatment_history" placeholder="치료 이력을 간단히 입력하세요" required>
+                        <button type="submit" class="cta-btn">맞춤 견적 요청하기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>왜 인레이치아보험 가입이 필요한가요?</h2>
+                <div class="feature-grid">
+                    <div class="item">
+                        <img src="https://via.placeholder.com/80/007BFF/fff?text=ICON1" alt="충치 치료 아이콘">
+                        <h3>비급여 치료비 부담 경감</h3>
+                        <p>인레이, 온레이, 크라운과 같은 비급여 치료는 건강보험 적용이 되지 않아 비용이 많이 발생합니다. 치아보험은 이러한 비급여 항목을 보장하여 경제적 부담을 덜어줍니다.</p>
+                    </div>
+                    <div class="item">
+                        <img src="https://via.placeholder.com/80/007BFF/fff?text=ICON2" alt="보존 치료 아이콘">
+                        <h3>보존 치료 집중 보장</h3>
+                        <p>인레이와 온레이는 충치가 신경까지 도달하기 전의 보존 치료에 해당합니다. 치아보험은 이 보존 치료에 대한 보장을 집중적으로 제공하여 치아를 최대한 보존할 수 있도록 돕습니다.</p>
+                    </div>
+                    <div class="item">
+                        <img src="https://via.placeholder.com/80/007BFF/fff?text=ICON3" alt="사전 예방 아이콘">
+                        <h3>사전 예방 및 관리</h3>
+                        <p>치아보험 가입을 통해 정기적인 검진과 스케일링을 포함한 예방 치료까지 보장받아 큰 치료로 이어지기 전에 관리할 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:50px;">함께 많이 찾는 키워드</h3>
+                <ul class="keyword-list">
+                    <li>#인레이치아보험</li>
+                    <li>#치아보험가격비교</li>
+                    <li>#인레이비용</li>
+                    <li>#충치치료보험적용</li>
+                    <li>#치아보험순위</li>
+                    <li>#인레이크라운차이점</li>
+                    <li>#치아보험가입조건</li>
+                    <li>#인레이치료후기</li>
+                    <li>#치아보험장단점</li>
+                    <li>#치아보험견적</li>
+                    <li>#비갱신치아보험</li>
+                    <li>#어린이치아보험</li>
+                    <li>#실비보험치과</li>
+                    <li>#치아보험보장범위</li>
+                    <li>#인레이보험추천</li>
+                    <li>#2026치아보험</li>
+                    <li>#치아보험면책기간</li>
+                    <li>#인레이개수제한</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>인레이 치료의 이해: 비용과 보험 보장 분석</h2>
+                <p>인레이(Inlay)는 충치나 기타 손상으로 치아 일부가 파손되었을 때, 손상된 부분을 제거하고 치과에서 미리 제작한 보철물을 접착하여 채워 넣는 보존 치료의 일종입니다. 충치가 깊지 않아 신경 치료가 필요 없는 단계에서 주로 이루어지며, 치아의 손상 범위에 따라 인레이(Inlay)와 온레이(Onlay)로 나뉩니다. 온레이는 인레이보다 더 넓은 범위를 덮어씌우는 치료입니다.</p>
+
+                <h3>인레이 재료별 특징 및 예상 가격 (2026년 기준)</h3>
+                <p>인레이는 어떤 재료를 사용하느냐에 따라 비용과 수명이 달라집니다. 충치치료에 사용되는 재료는 크게 금, 세라믹, 레진 인레이로 나뉩니다. 각 재료의 특징과 예상 비용을 비교하여 자신의 치아 상태에 맞는 합리적인 선택이 중요합니다.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>재료</th>
+                            <th>특징</th>
+                            <th>장점</th>
+                            <th>단점</th>
+                            <th>예상 비용 (치과마다 상이)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>골드 인레이 (Gold Inlay)</td>
+                            <td>금 함량이 높은 보철물로, 강도가 강함.</td>
+                            <td>치아와의 적합도가 우수하고, 강도가 높아 오래 사용 가능. 인체 친화적.</td>
+                            <td>비용이 높음, 심미성이 떨어짐, 열전도율이 높음.</td>
+                            <td>20만원 ~ 40만원대</td>
+                        </tr>
+                        <tr>
+                            <td>세라믹 인레이 (Ceramic Inlay)</td>
+                            <td>치아 색상과 가장 유사한 재료.</td>
+                            <td>심미성이 가장 우수함. 강도가 강함. 변색이 거의 없음.</td>
+                            <td>비용이 높음, 충격에 약해 파절 가능성 있음. 정교한 제작 필요.</td>
+                            <td>30만원 ~ 50만원대</td>
+                        </tr>
+                        <tr>
+                            <td>레진 인레이 (Resin Inlay)</td>
+                            <td>합성수지 재료로 제작.</td>
+                            <td>치아 색상과 유사하여 심미성 우수. 비용이 상대적으로 저렴함.</td>
+                            <td>강도가 약해 파절 가능성 높음. 시간이 지나면서 변색될 수 있음.</td>
+                            <td>15만원 ~ 30만원대</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>인레이치아보험의 핵심: 보존치료 보장 분석</h3>
+                <p>인레이치아보험의 핵심은 충치치료를 위한 보존치료 보장입니다. 대부분의 보험사는 인레이(Inlay)와 온레이(Onlay) 치료 시 치료 개수당 정해진 금액을 지급합니다. 2026년 기준으로, 보험사별로 보장 금액은 차이가 있지만, 일반적으로 10만원에서 20만원 사이의 금액을 보장합니다. 다만, 가입 후 1년 이내에는 감액기간이 적용되어 50%만 지급하는 경우가 많으니 계약서를 꼼꼼히 확인해야 합니다.</p>
+
+                <div class="callout">
+                    <h4>인레이치아보험 가입 시 체크포인트</h4>
+                    <p>1. <strong>보장 개수 제한:</strong> 연간 보장하는 인레이/온레이 치료 개수에 제한이 있는지 확인해야 합니다. 일부 상품은 연간 3개 또는 5개로 제한할 수 있습니다.</p>
+                    <p>2. <strong>면책 및 감액 기간:</strong> 보험 가입 후 즉시 보장이 되지 않습니다. 면책기간(보통 90일)과 감액기간(보통 1년)을 반드시 확인하여 치료 계획에 차질이 없도록 해야 합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container comparison-table">
+                <h2>인레이치아보험 VS. 기타 치아보험: 보장 차이점 비교</h2>
+                <p>치아보험은 보장 범위에 따라 크게 보존 치료 중심과 보철 치료 중심으로 나눌 수 있습니다. 인레이치아보험을 찾는 분들은 대개 보존 치료에 중점을 둔 상품을 찾게 됩니다. 인레이는 치과 치료의 시작점이며, 인레이를 놓치면 크라운으로, 크라운을 놓치면 임플란트로 이어지기 때문에 보존 치료 시점의 보장이 중요합니다.</p>
+
+                <h4>1. 보존치료 vs. 보철치료</h4>
+                <p>인레이치아보험은 인레이, 온레이, 레진, 아말감 등 충치 치료를 위한 보존 치료를 집중적으로 보장합니다. 반면, 보철 치료 보험은 임플란트, 브릿지, 틀니 등 치아를 대체하는 치료에 중점을 둡니다. 자신의 치아 상태에 따라 인레이와 같은 보존 치료가 많은 경우 보존 치료형 보험을, 이미 치아를 많이 상실했거나 신경 치료 후 크라운이 예상되는 경우 보철 치료형 보험을 선택하는 것이 합리적입니다.</p>
+
+                <h4>2. 치아보험 vs. 실비보험</h4>
+                <p>많은 분들이 실비보험으로 치과 치료가 가능한지 궁금해합니다. 실비보험은 기본적으로 비급여 치과 치료는 보장하지 않습니다. 다만, 상해로 인한 치과 치료는 일부 보장될 수 있습니다. 인레이치아보험은 이와 달리 비급여 항목인 인레이 치료비를 정액으로 지급하므로 중복 가입 시 더 큰 혜택을 받을 수 있습니다. 실비보험이 치아보험의 대체재가 될 수 없다는 점을 명확히 인지해야 합니다.</p>
+
+                <h4>3. 갱신형 vs. 비갱신형</h4>
+                <p>보험료가 오르는 갱신형과 보험료 변동 없이 일정 기간 유지되는 비갱신형 중 선택해야 합니다. 갱신형은 초기 보험료가 저렴하지만 나이가 들수록 보험료가 상승합니다. 비갱신형은 초기 보험료가 다소 높지만 장기적으로 볼 때 총 납입 보험료가 더 저렴할 수 있습니다. 특히 2026년 이후에는 노령화가 가속화되면서 갱신 시점의 보험료 부담이 더욱 커질 수 있으므로, 비갱신형 인레이치아보험을 선호하는 경향이 있습니다.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>인레이치아보험 가입 팁과 비용 절약 전략 (2026년 업데이트)</h2>
+                <p>2026년 현재 인레이치아보험 시장은 다양한 상품이 경쟁하고 있습니다. 현명하게 보험을 선택하고 비용을 절약하기 위한 몇 가지 팁을 소개합니다.</p>
+
+                <h3>1. 고지의무를 정확히 이행하고 면책기간을 활용하세요.</h3>
+                <p>치아보험 가입 시 고지의무는 매우 중요합니다. 특히 최근 5년 이내 치과 치료 기록이 있다면 반드시 고지해야 합니다. 고의로 알리지 않은 사실이 있다면 보험금 지급 거절은 물론 계약이 해지될 수 있습니다. 또한 면책기간이 끝나는 시점에 맞춰 치료 계획을 세우면 비용을 절약할 수 있습니다.</p>
+
+                <h3>2. 보장 개수 제한과 감액 기간을 꼼꼼히 비교하세요.</h3>
+                <p>인레이치아보험을 비교할 때, 보장 개수 제한이 있는지 확인해야 합니다. 충치가 많을 경우 개수 제한이 없는 상품이 유리할 수 있습니다. 또한 감액 기간(보통 1년) 동안 보장 금액이 절반으로 줄어들기 때문에, 가입 후 1년 이내에 치료 계획이 있다면 보험료 대비 효율이 떨어질 수 있습니다.</p>
+
+                <h3>3. 실속형 보장과 고급형 보장을 구분하여 선택하세요.</h3>
+                <p>단순히 인레이 보장만 원한다면 실속형 상품을 선택하여 보험료를 낮추는 것이 좋습니다. 실속형 상품은 인레이와 크라운 등 보존 치료에 집중하고 임플란트 보장 금액을 낮추는 방식입니다. 반면 임플란트 등 보철 치료까지 넉넉히 보장받고 싶다면 고급형 상품을 선택해야 합니다. 자신의 구강 건강 상태와 가족력을 고려하여 맞춤형으로 선택하는 것이 중요합니다.</p>
+
+                <h3>4. 다양한 치아보험 상품 비교 견적을 요청하세요.</h3>
+                <p>각 보험사마다 인레이 보장 금액, 보험료, 면책기간, 보장 개수 제한 등이 다릅니다. 한 곳의 견적만으로는 최적의 상품을 찾기 어렵습니다. 최소 3곳 이상의 보험사 상품을 비교 견적하여 자신에게 가장 유리한 조건을 찾아야 합니다. 특히 온라인 비교 센터를 활용하면 2026년 최신 상품 정보를 손쉽게 파악하고 보험료 절감 팁을 얻을 수 있습니다.</p>
+
+                <div class="callout">
+                    <h4>전문가 조언: 2026년 치아보험 트렌드</h4>
+                    <p>최근에는 인레이와 크라운 치료를 포함한 보존치료 보장을 강화하고, 충치뿐만 아니라 잇몸병(치주질환)으로 인한 치료까지 보장하는 상품이 인기를 끌고 있습니다. 특히 비갱신형 인레이치아보험은 장기적인 관점에서 유리한 선택으로 평가받고 있습니다.</p>
+                </div>
+
+                <h3>5. 인레이치아보험 가입 후기 및 내돈내산 경험 분석</h3>
+                <p>실제 인레이치아보험 가입자들의 내돈내산 후기를 분석해 보면, 가입 전 고지의무를 제대로 이행하지 않아 보험금 지급이 거절되는 사례가 많습니다. 또한 충치 치료가 예상되어 급하게 가입했으나 면책기간 때문에 보장을 받지 못하는 경우도 빈번합니다. 따라서 가입 전 충분한 상담을 통해 자신의 상황에 맞는 상품을 선택하는 것이 중요합니다.</p>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>자주 묻는 질문 (FAQ)</h2>
+
+                <div class="faq-item">
+                    <h3>인레이치아보험을 가입하기 전에 충치 치료가 필요한 상태라면 가입이 불가능한가요?</h3>
+                    <p>보험사마다 기준이 다릅니다. 대부분의 치아보험 상품은 가입 시 고지의무를 통해 현재 치료 중이거나 치료가 필요한 치아가 있다면 해당 치아에 대해서는 보장을 제외하는 경우가 많습니다. 가입 전에 이미 충치가 있다면 해당 충치는 보장받기 어렵지만, 다른 치아의 향후 치료에 대해서는 보장이 가능합니다. 자세한 내용은 보험사 약관을 확인해야 합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>인레이치아보험을 가입하면 인레이 치료 횟수에 제한이 있나요?</h3>
+                    <p>네, 대부분의 인레이치아보험은 보존치료에 대해 연간 보장 횟수 제한을 두고 있습니다. 상품에 따라 연간 3개, 5개 등으로 제한되거나, 개수 제한 없이 보장하는 상품도 있습니다. 충치가 여러 개 있거나 치아 관리가 필요한 경우 횟수 제한이 없는 상품을 선택하는 것이 유리할 수 있습니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>인레이치아보험에 가입할 때 면책기간과 감액기간이 중요한 이유가 무엇인가요?</h3>
+                    <p>면책기간은 보험 가입 후 일정 기간(보통 90일) 동안 보험금 지급이 안 되는 기간을 말하며, 감액기간은 면책기간 이후 일정 기간(보통 1년) 동안 보장 금액의 50%만 지급하는 기간을 말합니다. 이 기간을 고려하지 않고 가입 즉시 치료를 받으면 보장을 받을 수 없거나 절반만 받을 수 있기 때문에 중요합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>이미 치료한 인레이가 파손되거나 재치료가 필요할 때도 보험금을 받을 수 있나요?</h3>
+                    <p>치아보험은 대부분 새로운 충치나 질병으로 인한 치료만 보장하며, 기존에 치료했던 보철물의 재치료는 보장 대상에서 제외되는 경우가 많습니다. 그러나 일부 상품에서는 갱신 후 일정 기간이 지나면 재치료를 보장하는 특별 약관을 운영하기도 합니다. 계약 내용을 꼼꼼히 확인해야 합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>인레이치아보험 가입 시, 만기 환급형과 순수 보장형 중 어떤 것을 선택해야 할까요?</h3>
+                    <p>만기 환급형은 납입 보험료 중 일부를 만기 시점에 돌려주는 상품이며, 순수 보장형은 만기 환급금 없이 보험료가 저렴한 상품입니다. 인레이치아보험의 경우 순수 보장형이 만기 환급형보다 매월 납입하는 보험료가 저렴합니다. 치아보험의 특성상 만기 환급금이 크지 않으므로, 더 저렴한 보험료로 확실한 보장을 받는 순수 보장형을 선호하는 추세입니다.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>신뢰할 수 있는 외부 자료 및 참고 링크</h2>
+                <ul>
+                    <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9%EC%A0%95%EB%B3%B4/%EA%B3%B5%EC%A4%91%EC%9C%84%EC%83%9D%EA%B4%80%EB%A6%AC%EB%B2%95" target="_blank" rel="noopener">법제처 - 공중위생관리법 (치과 관련 규정 확인)</a></li>
+                    <li><a href="https://www.namu.wiki/w/%EC%B9%98%EC%95%84%EB%B3%B4%ED%97%98" target="_blank" rel="noopener">나무위키 - 치아보험 (정보성 백과사전 자료)</a></li>
+                    <li><a href="https://www.korea.go.kr/service/serviceInfoDetail.do?svcId=IND_000000000018" target="_blank" rel="noopener">정부24 - 국민건강보험공단 치과 치료 관련 정보</a></li>
+                    <li><a href="https://www.fss.or.kr/fss/main/index.jsp" target="_blank" rel="noopener">금융감독원 (보험 상품 비교 및 소비자 보호 정보)</a></li>
+                    <li><a href="https://www.health.go.kr/HealthInfoArea/HealthInfo/View.do?MenuId=health_01&cnts_type=4&page_no=1&idx=2910" target="_blank" rel="noopener">보건복지부 (충치 예방 및 관리 가이드라인)</a></li>
+                </ul>
+                <p>위 자료들은 인레이치아보험 가입 시 법적 기준, 치아 건강 관리, 보험 소비자 권리 등에 유용한 정보를 제공합니다. 보험 상품 선택 전 반드시 참고하시기 바랍니다.</p>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 토글 기능
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+
+  
